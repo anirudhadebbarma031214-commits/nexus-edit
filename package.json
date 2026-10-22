@@ -30,7 +30,7 @@
     "appId": "studio.ani.nexusedit",
     "productName": "NEXUS EDIT",
     "directories": { "output": "release" },
-    "files": ["dist/**/*", "src/main.js", "src/preload.js", "package.json"],
+    "files": ["dist/**/*", "src/main.js", "src/preload.cjs", "package.json"],
     "mac": { "target": ["dmg", "zip"] },
     "win": { "target": ["nsis", "portable"] },
     "nsis": { "oneClick": false, "allowToChangeInstallationDirectory": true }
