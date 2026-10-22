@@ -1,5 +1,5 @@
 import { app, BrowserWindow, dialog, ipcMain, shell } from 'electron';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import path from 'node:path';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -16,7 +16,7 @@ function createWindow() {
     backgroundColor: '#0b0d12',
     title: 'NEXUS EDIT',
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
+      preload: path.join(__dirname, 'preload.cjs'),
       contextIsolation: true,
       nodeIntegration: false,
       sandbox: true
@@ -54,7 +54,7 @@ app.whenReady().then(() => {
       title: 'Import media',
       properties: ['openFile', 'multiSelections'],
       filters: [
-        { name: 'Media files', extensions: ['mp4', 'mov', 'mkv', 'webm', 'avi', 'mp3', 'wav', 'aac', 'm4a', 'png', 'jpg', 'jpeg', 'webp'] },
+        { name: 'Media files', extensions: ['mp4', 'mov', 'mkv', 'webm', 'avi', 'm4v', 'mp3', 'wav', 'aac', 'm4a', 'png', 'jpg', 'jpeg', 'webp'] },
         { name: 'All files', extensions: ['*'] }
       ]
     });
@@ -62,7 +62,7 @@ app.whenReady().then(() => {
     return result.filePaths.map((filePath) => ({
       name: path.basename(filePath),
       path: filePath,
-      url: 'file://' + filePath.replaceAll('\\\\', '/'),
+      url: pathToFileURL(filePath).href,
       type: path.extname(filePath).slice(1).toLowerCase()
     }));
   });
