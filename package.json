@@ -10,7 +10,7 @@
     "dev": "concurrently -k \"vite --host 127.0.0.1\" \"wait-on http://127.0.0.1:5173 && electron .\"",
     "build": "vite build",
     "start": "electron .",
-    "dist": "npm run build && electron-builder"
+    "dist": "npm run build && electron-builder --publish never"
   },
   "dependencies": {
     "lucide-react": "^0.468.0",
@@ -29,10 +29,30 @@
   "build": {
     "appId": "studio.ani.nexusedit",
     "productName": "NEXUS EDIT",
-    "directories": { "output": "release" },
-    "files": ["dist/**/*", "src/main.js", "src/preload.cjs", "package.json"],
-    "mac": { "target": ["dmg", "zip"] },
-    "win": { "target": ["nsis", "portable"] },
-    "nsis": { "oneClick": false, "allowToChangeInstallationDirectory": true }
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "src/main.js",
+      "src/preload.cjs",
+      "package.json"
+    ],
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
   }
 }
